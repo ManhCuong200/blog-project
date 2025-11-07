@@ -16,11 +16,10 @@ const Home = () => {
         const res = await fetch("https://api-blog-af3u.onrender.com/api/posts");
         if (!res.ok) throw new Error("Không lấy được danh sách blog");
         const data = await res.json();
-
         console.log("✅ Kết quả API:", data);
         const items = Array.isArray(data.items) ? data.items : [];
         setBlogs(items);
-        setFilteredBlogs(items); 
+        setFilteredBlogs(items);
       } catch (err) {
         console.error("❌ Lỗi fetch:", err);
         setError(err.message);
@@ -34,13 +33,11 @@ const Home = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setHasSearched(true);
-
     const query = inputValue.trim().toLowerCase();
     if (query === "") {
       setFilteredBlogs(blogs);
       return;
     }
-
     const result = blogs.filter((blog) =>
       blog.title.toLowerCase().includes(query)
     );
@@ -52,13 +49,12 @@ const Home = () => {
       <HeroSection
         inputValue={inputValue}
         setInputValue={setInputValue}
-        onSearch={handleSearch} 
+        onSearch={handleSearch}
       />
 
       {error && (
         <p className="text-center mt-10 text-red-500 font-medium">{error}</p>
       )}
-
       {loading ? (
         <div className="max-w-7xl mx-auto px-4 py-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -82,9 +78,39 @@ const Home = () => {
           </div>
         </div>
       ) : hasSearched && filteredBlogs.length === 0 ? (
-        <p className="text-center text-gray-500 mt-10">
-          Không tìm thấy bài viết nào phù hợp.
-        </p>
+        <div className="flex flex-col items-center justify-center py-20 relative overflow-hidden">
+          <div className="absolute flex gap-6 animate-float-slow opacity-20">
+            <div className="w-24 h-32 bg-gray-300 dark:bg-gray-700 rounded-md"></div>
+            <div className="w-24 h-32 bg-gray-200 dark:bg-gray-600 rounded-md"></div>
+            <div className="w-24 h-32 bg-gray-300 dark:bg-gray-700 rounded-md"></div>
+          </div>
+
+          <div className="relative z-10 animate-bounce-slow mb-8">
+            <div className="w-32 h-32 rounded-full border-8 border-gray-300 dark:border-gray-700 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="gray"
+                className="w-10 h-10 dark:stroke-gray-300"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-4.35-4.35M17.65 9.35A8.3 8.3 0 119.35 17.65 8.3 8.3 0 0117.65 9.35z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            We could not find any blog
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">
+            Please try again with a different search query.
+          </p>
+        </div>
       ) : (
         <BlogItem blogs={filteredBlogs} />
       )}

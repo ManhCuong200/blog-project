@@ -30,7 +30,7 @@ const BlogDetail = () => {
   if (loading)
     return (
       <div className="flex justify-center items-center min-h-[70vh]">
-        <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
