@@ -10,28 +10,28 @@ const Home = () => {
   const [inputValue, setInputValue] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const res = await fetch("https://api-blog-af3u.onrender.com/api/posts");
-        if (!res.ok) throw new Error("Không lấy được danh sách blog");
-        const data = await res.json();
-        console.log("✅ Kết quả API:", data);
-        const items = Array.isArray(data.items) ? data.items : [];
-        setBlogs(items);
-        setFilteredBlogs(items);
-      } catch (err) {
-        console.error("❌ Lỗi fetch:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchBlogs();
-  }, []);
+useEffect(() => {
+  const fetchBlogs = async () => {
+    try {
+      const res = await fetch("https://api-blog-af3u.onrender.com/api/posts");
+      if (!res.ok) throw new Error("Không lấy được danh sách blog");
+      const data = await res.json();
+      console.log("✅ Kết quả API:", data);
+      const items = Array.isArray(data.items) ? data.items : [];
+      setBlogs(items);
+      setFilteredBlogs(items);
+    } catch (err) {
+      console.error("❌ Lỗi fetch:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchBlogs();
+}, []);
 
   const handleSearch = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     setHasSearched(true);
     const query = inputValue.trim().toLowerCase();
     if (query === "") {
@@ -58,22 +58,11 @@ const Home = () => {
       {loading ? (
         <div className="max-w-7xl mx-auto px-4 py-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
-            {[...Array(8)].map((_, i) => (
+            {[...Array(4)].map((_, i) => (
               <div
                 key={i}
-                className="animate-pulse bg-card shadow-md rounded-xl overflow-hidden"
-              >
-                <div className="h-56 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200" />
-                <div className="p-4 space-y-3">
-                  <div className="flex gap-2">
-                    <div className="w-12 h-4 bg-gray-200 rounded-full"></div>
-                    <div className="w-16 h-4 bg-gray-200 rounded-full"></div>
-                  </div>
-                  <div className="h-5 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-3 bg-gray-200 rounded w-full"></div>
-                  <div className="h-3 bg-gray-200 rounded w-5/6"></div>
-                </div>
-              </div>
+                className="h-56 w-full rounded-lg bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse dark:from-gray-700 dark:via-gray-600 dark:to-gray-700"
+              ></div>
             ))}
           </div>
         </div>
@@ -84,7 +73,6 @@ const Home = () => {
             <div className="w-24 h-32 bg-gray-200 dark:bg-gray-600 rounded-md"></div>
             <div className="w-24 h-32 bg-gray-300 dark:bg-gray-700 rounded-md"></div>
           </div>
-
           <div className="relative z-10 animate-bounce-slow mb-8">
             <div className="w-32 h-32 rounded-full border-8 border-gray-300 dark:border-gray-700 flex items-center justify-center">
               <svg
@@ -103,7 +91,6 @@ const Home = () => {
               </svg>
             </div>
           </div>
-
           <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
             We could not find any blog
           </h2>

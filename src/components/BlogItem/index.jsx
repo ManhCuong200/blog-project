@@ -1,6 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+function stripHTML(input) {
+  if (typeof input !== "string") return "";
+  const temp = document.createElement("div");
+  temp.innerHTML = input;
+  return temp.textContent || temp.innerText || "";
+}
+
 const BlogItem = ({ blogs }) => {
   if (!blogs || blogs.length === 0) {
     return (
@@ -15,7 +22,7 @@ const BlogItem = ({ blogs }) => {
       {blogs.map((blog) => (
         <Link
           key={blog._id}
-          to={`/blog/${blog._id}`}
+          to={`/blog-details/${blog._id}`}
           className="group block shadow-md hover:shadow-xl rounded-xl overflow-hidden transition-all duration-300 bg-card border border-border"
         >
           <div className="overflow-hidden">
@@ -25,6 +32,7 @@ const BlogItem = ({ blogs }) => {
               className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
+
           <div className="p-5 flex flex-col justify-between">
             {Array.isArray(blog.tags) && blog.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-3">
@@ -38,19 +46,13 @@ const BlogItem = ({ blogs }) => {
                 ))}
               </div>
             )}
+
             <h3 className="text-lg font-semibold text-foreground mb-2 line-clamp-1 group-hover:text-primary transition-colors">
               {blog.title}
             </h3>
-            <p className="text-xs text-gray-500 mb-2">
-              By{" "}
-              {typeof blog.author === "object"
-                ? blog.author.username || blog.author.email || "Unknown"
-                : blog.author || "Unknown"}
-            </p>
+
             <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
-              {typeof blog.content === "string"
-                ? blog.content.replace(/<[^>]+>/g, "")
-                : "Không có nội dung hiển thị."}
+              {stripHTML(blog.content) || "Không có nội dung hiển thị."}
             </p>
           </div>
         </Link>

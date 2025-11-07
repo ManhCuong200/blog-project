@@ -7,11 +7,11 @@ import Register from "./pages/Register";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter> 
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/blog/:id" element={<BlogDetails />} />
+          <Route path="/blog-details/:id" element={<BlogDetails />} />  
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

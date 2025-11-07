@@ -25,12 +25,16 @@ export function DropdownMenuAuth() {
 
       <DropdownMenuContent
         align="end"
-        className="w-40 mt-2 rounded-md shadow-lg"
+        className="w-40 mt-2 rounded-md shadow-lg border border-gray-100 bg-white"
       >
-        <DropdownMenuItem asChild onClick={() => setOpen(false)}>
+        <DropdownMenuItem
+          asChild
+          onClick={() => setOpen(false)}
+          className="transition-colors duration-200 focus:bg-[#5044E5] focus:text-white hover:bg-[#5044E5] hover:text-white rounded-md"
+        >
           <Link
             to="/login"
-            className="flex items-center gap-2 group cursor-pointer"
+            className="flex items-center gap-2 cursor-pointer w-full"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +46,7 @@ export function DropdownMenuAuth() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="w-4 h-4 text-[#6b7280] group-hover:text-white "
+              className="w-4 h-4 text-gray-500 group-hover:text-white"
             >
               <path d="M18.9 7a8 8 0 0 1 1.1 5v1a6 6 0 0 0 .8 3"></path>
               <path d="M8 11a4 4 0 0 1 8 0v1a10 10 0 0 0 2 6"></path>
@@ -54,10 +58,14 @@ export function DropdownMenuAuth() {
           </Link>
         </DropdownMenuItem>
 
-        <DropdownMenuItem asChild onClick={() => setOpen(false)}>
+        <DropdownMenuItem
+          asChild
+          onClick={() => setOpen(false)}
+          className="transition-colors duration-200 focus:bg-[#5044E5] focus:text-white hover:bg-[#5044E5] hover:text-white rounded-md"
+        >
           <Link
             to="/register"
-            className="flex items-center gap-2 group cursor-pointer"
+            className="flex items-center gap-2 cursor-pointer w-full"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +77,7 @@ export function DropdownMenuAuth() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="w-4 h-4 text-[#6b7280] group-hover:text-white"
+              className="w-4 h-4 text-gray-500 group-hover:text-white"
             >
               <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
               <path d="M16 19h6"></path>

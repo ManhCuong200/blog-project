@@ -12,7 +12,7 @@ const Layout = () => {
   };
   return (
     <div className={theme === "dark" ? "dark" : ""}>
-      <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+      <div className="min-h-screen bg-background text-foreground">
         <Header toggleTheme={toggleTheme} currentTheme={theme} />
         <main className="flex-1 mt-20">
           <Outlet />
