@@ -13,7 +13,10 @@ export default function LoginCard() {
   return (
     <Card className="w-full max-w-sm shadow-lg rounded-xl py-6">
       <CardHeader className="flex items-center justify-center pb-2">
-        <img className="w-15 h-15" src={Logo} alt="Logo" />
+        <Link href="/">
+          <img className="w-15 h-15" src={Logo} alt="Logo" />
+        </Link>
+        
       </CardHeader>
 
       <CardContent>
