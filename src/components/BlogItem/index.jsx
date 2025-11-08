@@ -24,7 +24,7 @@ const BlogItem = ({ blogs }) => {
           <Link
             key={blog._id}
             to={`/blog-details/${blog._id}`}
-            className="group block rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all 
+            className="group block rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-lg 
   bg-white dark:bg-[#111111] dark:border-[#222] dark:shadow-none"
           >
             <div className="overflow-hidden rounded-t-xl bg-gray-50">

@@ -24,7 +24,6 @@ export default function RegisterCard() {
       toast.error("Please fill in all fields");
       return;
     }
-    //BLOck load form
     e.preventDefault();
     try {
       setLoading(true);
