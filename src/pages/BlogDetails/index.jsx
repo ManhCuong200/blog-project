@@ -13,7 +13,7 @@ const BlogDetail = () => {
       try {
         setLoading(true);
         const data = await GetBlogById(id);
-        console.log("📦 Blog chi tiết:", data);
+        console.log("Blog chi tiết:", data);
         setBlog(data);
       } catch (err) {
         console.error("Lỗi khi tải blog:", err);

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import BlogItem from "@/components/BlogItem";
-import BlogSkeleton from "@/components/Contentloader"; 
+import BlogSkeleton from "@/components/Contentloader";
 import { GetAllBlog } from "@/services/api/blogs";
+import Lottie from "lottie-react";
+import noResultAnimation from "@/assets/giff/loading_files.json";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
@@ -16,7 +18,6 @@ const Home = () => {
       try {
         setLoading(true);
         const data = await GetAllBlog();
-        console.log("Kết quả API:", data);
         const items = Array.isArray(data.items) ? data.items : [];
         setBlogs(items);
         setFilteredBlogs(items);
@@ -61,29 +62,14 @@ const Home = () => {
           </div>
         </div>
       ) : hasSearched && filteredBlogs.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 relative overflow-hidden">
-          <div className="relative z-10 animate-bounce-slow mb-8">
-            <div className="w-32 h-32 rounded-full border-8 border-gray-300 dark:border-gray-700 flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="gray"
-                className="w-10 h-10 dark:stroke-gray-300"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-4.35-4.35M17.65 9.35A8.3 8.3 0 119.35 17.65 8.3 8.3 0 0117.65 9.35z"
-                />
-              </svg>
-            </div>
+        <div className="flex flex-col items-center justify-center py-2">
+          <div className="min-h-[200px] flex justify-center items-center mb-4">
+            <Lottie animationData={noResultAnimation} loop={true} />
           </div>
-          <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+          <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
             We could not find any blog
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
+          <p className="text-gray-500 dark:text-gray-400 text-base">
             Please try again with a different search query.
           </p>
         </div>
