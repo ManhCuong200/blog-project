@@ -22,7 +22,7 @@ const Home = () => {
         setFilteredBlogs(items);
       } catch (err) {
         console.error("Lỗi fetch:", err);
-        setError("Không thể tải danh sách blog 😢");
+        setError("Không thể tải danh sách blog");
       } finally {
         setLoading(false);
       }
@@ -34,13 +34,11 @@ const Home = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setHasSearched(true);
-
     const query = inputValue.trim().toLowerCase();
     if (query === "") {
       setFilteredBlogs(blogs);
       return;
     }
-
     const result = blogs.filter((blog) =>
       blog.title?.toLowerCase().includes(query)
     );
