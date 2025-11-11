@@ -14,7 +14,7 @@ export default function LoginPage() {
       setLoading(true);
       // nếu call api thành công thì sẽ trả về user
       const user = await loginUser({ email, password });
-      console.log("✅ Login successful:", user);
+      console.log("Login successful:", user);
       toast.success("Login successful!");
     } catch (err) {
       // neu user ko nhap thong tin ma an submit sẽ hiện thông báo lỗi "email" is not allowed to be empty
@@ -28,7 +28,7 @@ export default function LoginPage() {
         return;
       }
       toast.error("Login failed. Please try again.");
-      console.log("❌ Error full:", err);
+      console.log("Error full:", err);
     } finally {
       setLoading(false);
     }
