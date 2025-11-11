@@ -8,7 +8,6 @@ import {
 import { User } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
 export function DropdownMenuAuth() {
   const [open, setOpen] = useState(false);
 

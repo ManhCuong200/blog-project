@@ -34,7 +34,6 @@ export default function RegisterCard({
             id="email"
             type="email"
             placeholder="Enter your email"
-            required
           />
           <Input
             value={username}
@@ -42,7 +41,6 @@ export default function RegisterCard({
             id="username"
             type="text"
             placeholder="Enter your username"
-            required
           />
           <Input
             value={password}
@@ -50,10 +48,9 @@ export default function RegisterCard({
             id="password"
             type="password"
             placeholder="Enter your password"
-            required
           />
           <Button
-            onClick={() => handleSubmit()}
+            // onClick={() => handleSubmit(e)}
             type="submit"
             className="w-full bg-[#5044E5] text-white"
             disabled={loading}

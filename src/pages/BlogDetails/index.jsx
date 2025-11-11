@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetBlogById } from "@/services/api/blogs";
-import { Spinner } from "@/components/ui/spinner"; 
+import { Spinner } from "@/components/ui/spinner";
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -20,7 +20,7 @@ const BlogDetail = () => {
       } finally {
         setLoading(false);
       }
-    };
+    };  
     fetchBlog();
   }, [id]);
 
@@ -73,14 +73,16 @@ const BlogDetail = () => {
           {blog.tags.map((tag, i) => (
             <span
               key={i}
-              className="bg-[#E8E7FF] text-primary text-sm px-3 py-1 rounded-full"
+              className="px-3 py-1 rounded-full text-sm font-medium 
+        bg-gray-200 text-gray-700 
+        dark:bg-gray-800 dark:text-gray-200 
+        transition-colors duration-300"
             >
               {tag}
             </span>
           ))}
         </div>
       )}
-
       <div
         className="prose max-w-none text-lg leading-relaxed text-foreground text-center"
         dangerouslySetInnerHTML={{

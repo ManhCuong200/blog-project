@@ -10,10 +10,6 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e) => {
-    if (!email || !username || !password) {
-      toast.error("Please fill in all fields");
-      return;
-    }
     e.preventDefault();
     try {
       setLoading(true);
@@ -21,8 +17,9 @@ export default function RegisterPage() {
       console.log("success:", respone);
       toast.success("Register success");
     } catch (err) {
-      console.log(err);
-      toast.error("Register failed");
+      console.log("Error:", err.response?.data);
+      const message = err.response?.data?.message || "Register failed";
+      toast.error(message);
     } finally {
       setLoading(false);
     }

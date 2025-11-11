@@ -34,13 +34,18 @@ const BlogItem = ({ blogs }) => {
                 className="w-full h-50 object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
-            <div className="p-10 flex flex-col justify-between min-h-[140px]">
+            <div className="p-10 flex flex-col justify-between min-h-[160px]">
               {Array.isArray(blog.tags) && blog.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-3">
                   {blog.tags.slice(0, 3).map((tag, index) => (
                     <span
                       key={index}
-                      className="inline-flex items-center justify-center bg-[#E8E7FF] text-primary text-xs font-medium px-3 py-1 rounded-full"
+                      className="inline-flex items-center justify-center 
+                      px-3 py-1 rounded-full text-xs font-medium
+                      bg-[#E8E7FF] text-[#5044E5] 
+                      dark:bg-[#3E357A] dark:text-[#DAD3FF]
+                      border border-[#5044E580] dark:border-[#7D6CFF80]
+                      shadow-sm transition-colors duration-300"
                     >
                       {tag}
                     </span>

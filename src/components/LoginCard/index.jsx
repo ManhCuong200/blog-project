@@ -41,10 +41,9 @@ export default function LoginCard({
             id="password"
             type="password"
             placeholder="Enter your password"
-            required
           />
           <Button
-            onClick={() => handleSubmit()}
+            // onClick={() => handleSubmit()}
             type="submit"
             className="w-full bg-[#5044E5] text-white"
             disabled={loading}

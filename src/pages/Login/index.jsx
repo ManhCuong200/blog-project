@@ -9,19 +9,26 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
-    if (!email || !password) {
-      toast.error("Please fill in all fields");
-      return;
-    }
     e.preventDefault();
     try {
       setLoading(true);
-      const respone = await loginUser({ email, password });
-      console.log("success:", respone);
-      toast.success("Login success");
+      // nếu call api thành công thì sẽ trả về user
+      const user = await loginUser({ email, password });
+      console.log("✅ Login successful:", user);
+      toast.success("Login successful!");
     } catch (err) {
-      console.log(err);
-      toast.error("Login fail");
+      // neu user ko nhap thong tin ma an submit sẽ hiện thông báo lỗi "email" is not allowed to be empty
+      if (err?.response?.status === 400) {
+        toast.error('"email" is not allowed to be empty');
+        return;
+      }
+      // neu user nhap sai thong tin de dang nhap thi se hien thi thong bao loi cho nguoi dung biet email hoac password khong dung
+      if (err?.response?.status === 401) {
+        toast.error(err?.response?.data?.message || "sai email hoặc mật khẩu");
+        return;
+      }
+      toast.error("Login failed. Please try again.");
+      console.log("❌ Error full:", err);
     } finally {
       setLoading(false);
     }
