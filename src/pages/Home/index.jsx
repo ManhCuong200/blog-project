@@ -58,12 +58,14 @@ const Home = () => {
             ))}
           </div>
         </div>
-      ) : inputValue.trim() && filteredBlogs.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-2">
-          <div className="min-h-[200px] flex justify-center items-center mb-4">
-            <Lottie animationData={noResultAnimation} loop={true} />
-          </div>
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
+      ) : filteredBlogs.length === 0 ? (
+        <div className="flex flex-col items-center justify-center mt-8">
+          <Lottie
+            animationData={noResultAnimation}
+            loop
+            className="min-h-[200px]"
+          />
+          <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mt-4">
             We could not find any blog
           </h2>
           <p className="text-gray-500 dark:text-gray-400 text-base">
