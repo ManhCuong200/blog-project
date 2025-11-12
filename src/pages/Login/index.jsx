@@ -1,34 +1,20 @@
-import React, { useState } from "react";
-import { toast } from "react-hot-toast";
-import { loginUser } from "@/services/api/users";
+import React, { useState, useContext } from "react";
 import LoginCard from "@/components/LoginCard";
+import AuthContext from "@/contexts/authContext";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); 
+  const { loginUser } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      // nếu call api thành công thì sẽ trả về user
-      const user = await loginUser({ email, password });
-      console.log("Login successful:", user);
-      toast.success("Login successful!");
-    } catch (err) {
-      // neu user ko nhap thong tin ma an submit sẽ hiện thông báo lỗi "email" is not allowed to be empty
-      if (err?.response?.status === 400) {
-        toast.error('"email" is not allowed to be empty');
-        return;
-      }
-      // neu user nhap sai thong tin de dang nhap thi se hien thi thong bao loi cho nguoi dung biet email hoac password khong dung
-      if (err?.response?.status === 401) {
-        toast.error(err?.response?.data?.message || "sai email hoặc mật khẩu");
-        return;
-      }
-      toast.error("Login failed. Please try again.");
-      console.log("Error full:", err);
+      await loginUser(email, password);
+    } catch (error) {
+      console.error(error);
     } finally {
       setLoading(false);
     }

@@ -1,25 +1,21 @@
-import React, { useState } from "react";
-import { toast } from "react-hot-toast";
-import { SignUpUser } from "@/services/api/users";
+import React, { useState,useContext } from "react";
 import RegisterCard from "@/components/RegisterCard";
+import AuthContext from "@/contexts/authContext";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { signUpUser } = useContext(AuthContext);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const respone = await SignUpUser({ email, username, password });
-      console.log("success:", respone);
-      toast.success("Register success");
+      await signUpUser({ email, username, password });
     } catch (err) {
       console.log("Error:", err.response?.data);
-      const message = err.response?.data?.message || "Register failed";
-      toast.error(message);
     } finally {
       setLoading(false);
     }

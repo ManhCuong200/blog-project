@@ -11,7 +11,6 @@ const Home = () => {
   const [filteredBlogs, setFilteredBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [hasSearched, setHasSearched] = useState(false);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -27,13 +26,11 @@ const Home = () => {
         setLoading(false);
       }
     };
-
     fetchBlogs();
   }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setHasSearched(true);
     const query = inputValue.trim().toLowerCase();
     if (!query) {
       setFilteredBlogs(blogs);
@@ -61,7 +58,7 @@ const Home = () => {
             ))}
           </div>
         </div>
-      ) : hasSearched && filteredBlogs.length === 0 ? (
+      ) : inputValue.trim() && filteredBlogs.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-2">
           <div className="min-h-[200px] flex justify-center items-center mb-4">
             <Lottie animationData={noResultAnimation} loop={true} />
