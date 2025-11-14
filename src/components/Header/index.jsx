@@ -11,7 +11,7 @@ const Header = ({ toggleTheme, currentTheme }) => {
           <img className="logo max-w-12 cursor-pointer" src={Logo} alt="logo" />
         </Link>
         <div className="flex justify-end items-center gap-2">
-          <Link to="/login">
+          <Link to="/create-blog">
             <button
               data-slot="button"
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-[#5044E5] hover:bg-[#5044E5] h-9 px-4 py-2 has-[&gt;svg]:px-3 text-white cursor-pointer"

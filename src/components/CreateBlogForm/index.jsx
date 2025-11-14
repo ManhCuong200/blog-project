@@ -1,0 +1,146 @@
+import React from "react";
+import { Input } from "@/components/ui/input";
+import { Editor } from "@tinymce/tinymce-react"; 
+
+const CreateBlog = ({ tagInput, setTagInput, tags, handleAddTag, handleRemoveTag }) => {
+  return (
+    <div className="grid gap-6 px-5 mx-auto max-w-7xl my-20 min-h-[60vh]">
+      <div>
+        <h2 className="hero-title text-3xl sm:text-6xl font-semibold sm:leading-[4rem] text-[#5044E5] text-center mt-10 mb-8">
+          📝 Create a New Blog
+        </h2>
+
+        <div className="grid gap-6">
+          <div className="grid gap-2">
+            <legend className="font-medium">Blog Image</legend>
+            <div className="border border-dashed border-gray-400 rounded-lg p-4 grid justify-center">
+              <label
+                htmlFor="blog-image"
+                className="rounded-lg p-2 text-center cursor-pointer hover:bg-gray-50 transition"
+              >
+                <div className="text-sm text-gray-600 flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    className="tabler-icon tabler-icon-upload inline-block mr-2 w-5 h-5"
+                  >
+                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                    <path d="M7 9l5 -5l5 5"></path>
+                    <path d="M12 4l0 12"></path>
+                  </svg>
+                  Click to upload image
+                </div>
+
+                <Input
+                  id="blog-image"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                />
+              </label>
+            </div>
+          </div>
+
+          <div className="grid gap-2">
+            <label htmlFor="title" className="font-medium text-sm">
+              Blog Title
+            </label>
+            <Input id="title" placeholder="Enter blog title" />
+          </div>
+
+          <div className="grid gap-2">
+            <label htmlFor="content" className="font-medium text-sm">
+              Blog Content
+            </label>
+
+            <Editor
+              apiKey="xeydi4k1zx6pi3unyfncthoh9pwsjaa68ca229fcu1gso009"
+              init={{
+                height: 400,
+                menubar: true,
+                plugins: [
+                  "anchor", "autolink", "charmap", "codesample", "emoticons", "link", "lists", "media", "searchreplace", "table", "visualblocks", "wordcount", 
+                  "checklist", "mediaembed", "casechange", "formatpainter", "pageembed", "a11ychecker", "tinymcespellchecker", "permanentpen", "powerpaste", "advtable", 
+                  "advcode", "advtemplate", "ai", "uploadcare", "mentions", "tinycomments", "tableofcontents", "footnotes", "mergetags", "autocorrect", "typography", 
+                  "inlinecss", "markdown", "importword", "exportword", "exportpdf"
+                ],
+                toolbar:
+                  "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+                tinycomments_mode: "embedded",
+                tinycomments_author: "Author name",
+                mergetags_list: [
+                  { value: "First.Name", title: "First Name" },
+                  { value: "Email", title: "Email" },
+                ],
+                ai_request: (request, respondWith) =>
+                  respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+                uploadcare_public_key: "73afe0c25fc5b53718b1",
+              }}
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <label htmlFor="tag" className="font-medium text-sm">
+              Blog Tag
+            </label>
+
+            <div className="flex gap-2">
+              <Input
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleAddTag();
+                  }
+                }}
+                value={tagInput}
+                onChange={(e) => setTagInput(e.target.value)}
+                id="tag"
+                placeholder="Enter blog tag"
+              />
+              <button
+                onClick={() => handleAddTag()}
+                type="button"
+                className="bg-primary text-white rounded-md px-4 h-9 hover:bg-primary/90"
+              >
+                Add Tag
+              </button>
+            </div>
+
+            <div className="flex gap-2 flex-wrap mt-2">
+              {tags.map((t, i) => (
+                <span
+                  key={i}
+                  className="flex items-center gap-2 bg-[#5044E5] text-white px-4 py-1 rounded-full"
+                >
+                  {t}
+                  <button
+                    onClick={() => handleRemoveTag(i)}
+                    type="button"
+                    className="text-white hover:text-gray-200 text-sm cursor-pointer"
+                  >
+                    &times;
+                  </button>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-[#5044E5] hover:bg-[#5044E5]/90 h-9 px-4 py-2 w-fit mx-auto text-white cursor-pointer"
+          >
+            Create Blog
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CreateBlog;
