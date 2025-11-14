@@ -1,6 +1,7 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import RegisterCard from "@/components/RegisterCard";
 import AuthContext from "@/contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -8,14 +9,19 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { signUpUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      await signUpUser({ email, username, password });
+      const ok = await signUpUser({ email, username, password });
+
+      if (ok) {
+        navigate("/login");
+      }
     } catch (err) {
-      console.log("Error:", err.response?.data);
+      console.log("Error:", err);
     } finally {
       setLoading(false);
     }

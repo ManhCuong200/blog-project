@@ -1,18 +1,24 @@
 import React, { useState, useContext } from "react";
 import LoginCard from "@/components/LoginCard";
-import AuthContext from "@/contexts/authContext";
+import { AuthContext } from "@/contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const { loginUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      await loginUser(email, password);
+      const success = await loginUser(email, password);
+
+      if (success) {
+        navigate("/");
+      }
     } catch (error) {
       console.error(error);
     } finally {

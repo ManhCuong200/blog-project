@@ -29,22 +29,22 @@ const Home = () => {
     fetchBlogs();
   }, []);
 
-const handleSearch = (e) => {
-  e.preventDefault();
-  const query = inputValue.trim().toLowerCase();
-  if (!query) {
-    setFilteredBlogs(blogs);
-    return;
-  }
-  if (query.length !== 1 || !/^[a-z]$/.test(query)) {
-    setFilteredBlogs([]);
-    return;
-  }
-  const result = blogs.filter((blog) =>
-    blog.title?.toLowerCase().startsWith(query)
-  );
-  setFilteredBlogs(result);
-};
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const query = inputValue.trim().toLowerCase();
+    if (!query) {
+      setFilteredBlogs(blogs);
+      return;
+    }
+    if (query.length !== 1 || !/^[a-z]$/.test(query)) {
+      setFilteredBlogs([]);
+      return;
+    }
+    const result = blogs.filter((blog) =>
+      blog.title?.toLowerCase().startsWith(query)
+    );
+    setFilteredBlogs(result);
+  };
 
   return (
     <div>
