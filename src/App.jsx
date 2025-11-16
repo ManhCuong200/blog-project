@@ -10,7 +10,7 @@ import CreateBlog from "./pages/CreateBlogs";
 import MyPost from "./pages/MyPost";
 import UserManagement from "./pages/UserManagement";
 
-function App() {    
+function App() {
   return (
     <AuthContextProvider>
       <BrowserRouter>
@@ -19,10 +19,12 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/blog-details/:id" element={<BlogDetails />} />
+
             <Route path="/create-blog" element={<CreateBlog />} />
             <Route path="/my-posts" element={<MyPost />} />
             <Route path="/user-management" element={<UserManagement />} />
           </Route>
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

@@ -1,6 +1,8 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Editor } from "@tinymce/tinymce-react";
+import UploadImage from "@/components/UploadImage";
+import { Spinner } from "@/components/ui/spinner";
 
 const CreateBlog = ({
   tagInput,
@@ -8,6 +10,13 @@ const CreateBlog = ({
   tags,
   handleAddTag,
   handleRemoveTag,
+  handleUploadFile,
+  handleCreateBlog,
+  title,
+  setTitle,
+  content,
+  setContent,
+  loading,
 }) => {
   return (
     <div className="grid gap-6 px-5 mx-auto max-w-7xl my-20 min-h-[60vh]">
@@ -19,12 +28,13 @@ const CreateBlog = ({
         <div className="grid gap-6">
           <div className="grid gap-2">
             <legend className="font-medium">Blog Image</legend>
-            <div className="border border-dashed border-gray-400 rounded-lg p-4 grid justify-center">
+            {/* <div className="border border-dashed border-gray-400 rounded-lg p-4 grid justify-center">
               <label
                 htmlFor="blog-image"
                 className="rounded-lg p-2 text-center cursor-pointer hover:bg-gray-50 transition"
               >
                 <div className="text-sm text-gray-600 flex items-center justify-center">
+
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -41,32 +51,42 @@ const CreateBlog = ({
                     <path d="M7 9l5 -5l5 5"></path>
                     <path d="M12 4l0 12"></path>
                   </svg>
+                  
                   Click to upload image
                 </div>
 
                 <Input
+                  onChange={(e) => handleUploadFile(e.target.files[0])}
                   id="blog-image"
                   type="file"
                   accept="image/*"
                   className="hidden"
                 />
               </label>
-            </div>
+            </div> */}
+            <UploadImage onUpload={handleUploadFile} />
           </div>
 
           <div className="grid gap-2">
             <label htmlFor="title" className="font-medium text-sm">
               Blog Title
             </label>
-            <Input id="title" placeholder="Enter blog title" />
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              id="title"
+              placeholder="Enter blog title"
+            />
           </div>
-
           <div className="grid gap-2">
             <label htmlFor="content" className="font-medium text-sm">
               Blog Content
             </label>
 
             <Editor
+              value={content}
+              onEditorChange={(newValue) => setContent(newValue)}
+              id="content"
               apiKey="xeydi4k1zx6pi3unyfncthoh9pwsjaa68ca229fcu1gso009"
               init={{
                 height: 400,
@@ -148,7 +168,7 @@ const CreateBlog = ({
               <button
                 onClick={() => handleAddTag()}
                 data-slot="button"
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-[#5044E5] hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 text-white"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-[#5044E5] hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 text-white"
               >
                 Add Tag
               </button>
@@ -174,10 +194,18 @@ const CreateBlog = ({
           </div>
 
           <button
+            onClick={() => handleCreateBlog()}
             type="button"
             className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-[#5044E5] hover:bg-[#5044E5]/90 h-9 px-4 py-2 w-fit mx-auto text-white cursor-pointer"
+            disabled={loading}
           >
-            Create Blog
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                <Spinner /> Creating blog
+              </div>
+            ) : (
+              "Create Blog"
+            )}
           </button>
         </div>
       </div>
