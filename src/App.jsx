@@ -5,7 +5,7 @@ import BlogDetails from "./pages/BlogDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
-import { AuthContextProvider } from "./contexts/authContext.jsx";
+import { AuthContextProvider } from "./contexts/authContext";
 import CreateBlog from "./pages/CreateBlogs";
 import MyPost from "./pages/MyPost";
 import UserManagement from "./pages/UserManagement";
@@ -19,12 +19,10 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/blog-details/:id" element={<BlogDetails />} />
-
             <Route path="/create-blog" element={<CreateBlog />} />
             <Route path="/my-posts" element={<MyPost />} />
             <Route path="/user-management" element={<UserManagement />} />
           </Route>
-
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

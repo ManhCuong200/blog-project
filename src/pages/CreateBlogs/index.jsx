@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CreateBlogForm from "@/components/CreateBlogForm";
 import { CreateBlog } from "@/services/api/blogs";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const CreateBlogs = () => {
   const [tagInput, setTagInput] = useState("");
@@ -10,6 +11,7 @@ const CreateBlogs = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleAddTag = () => {
     if (!tagInput.trim()) return;
@@ -53,8 +55,9 @@ const CreateBlogs = () => {
       const data = response.data;
       console.log("data:", data);
       navigate("/");
+      toast.success("Create blog successful");
     } catch (err) {
-      setError(err.message);
+      toast.error(err.message);
       setImageUrl("");
       setContent("");
       setTitle("");

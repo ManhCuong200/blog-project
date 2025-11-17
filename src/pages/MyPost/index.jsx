@@ -16,10 +16,8 @@ const MyPost = () => {
   const handleDelete = async () => {
     try {
       await DeleteBlog(deletePostId);
-
       const response = await GetAllBlog();
       setPosts(response.items);
-
       setOpenDelete(false);
     } catch (err) {
       console.log("Lỗi khi xóa blog:", err);
@@ -51,7 +49,7 @@ const MyPost = () => {
         open={openDelete}
         setOpen={setOpenDelete}
         blogTitle={titleToDelete}
-        handleDelete={handleDelete}
+        onConfirm={handleDelete}
       />
     </div>
   );

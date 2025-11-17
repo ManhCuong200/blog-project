@@ -10,7 +10,6 @@ import { toast } from "react-hot-toast";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-
   const [userInfo, setUserInfo] = useState(
     localStorage.getItem("userInfo")
       ? JSON.parse(localStorage.getItem("userInfo"))
@@ -23,21 +22,25 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const res = await login({ email, password });
       if (res.status === 200) {
-        const data = res.data;
         toast.success("Login successful");
-        setUserInfo(data);
-        localStorage.setItem("userInfo", JSON.stringify(data));
-        const profile = await fetchUserProfile();
-        setUserInfo({ ...data, ...profile });
-        setRole(profile.user?.role);
-        localStorage.setItem(
-          "userInfo",
-          JSON.stringify({ ...data, ...profile })
-        );
+        const basicUser = res.data;
+        localStorage.setItem("userInfo", JSON.stringify(basicUser));
+        const profileRes = await fetchUserProfile();
+        if (profileRes.status === 200) {
+          const fullUser = {
+            ...basicUser,
+            ...profileRes.data.user,
+          };
+          setUserInfo(fullUser);
+          setRole(fullUser.role);
+          localStorage.setItem("userInfo", JSON.stringify(fullUser));
+          return true;
+        }
       }
-      return res;
+      return false;
     } catch (error) {
       toast.error(error.response?.data?.message || "Login failed");
+      return false;
     }
   };
 

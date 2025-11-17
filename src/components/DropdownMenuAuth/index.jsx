@@ -12,7 +12,7 @@ import { AuthContext } from "../../contexts/authContext";
 
 export function DropdownMenuAuth() {
   const [open, setOpen] = useState(false);
-  const { userInfo, logoutUserContext, role } = useContext(AuthContext);
+  const { logoutUserContext, role } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -36,7 +36,7 @@ export function DropdownMenuAuth() {
         align="end"
         className="w-40 mt-2 shadow-lg border bg-white p-1 rounded-md"
       >
-        {userInfo ? (
+        {role ? (
           <>
             <DropdownMenuItem
               asChild
