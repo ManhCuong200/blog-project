@@ -9,6 +9,7 @@ import { AuthContextProvider } from "./contexts/authContext";
 import CreateBlog from "./pages/CreateBlogs";
 import MyPost from "./pages/MyPost";
 import UserManagement from "./pages/UserManagement";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -21,7 +22,14 @@ function App() {
             <Route path="/blog-details/:id" element={<BlogDetails />} />
             <Route path="/create-blog" element={<CreateBlog />} />
             <Route path="/my-posts" element={<MyPost />} />
-            <Route path="/user-management" element={<UserManagement />} />
+            <Route
+              path="/user-management"
+              element={
+                <ProtectedRoute role="admin">
+                  <UserManagement />
+                </ProtectedRoute>
+              }
+            />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

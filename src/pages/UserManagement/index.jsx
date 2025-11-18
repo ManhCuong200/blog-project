@@ -11,7 +11,7 @@ const UserManagement = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openRoleDialog, setOpenRoleDialog] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [currentRole, setCurrentRole] = useState("user");
+  const [currentRole, setCurrentRole] = useState("");
 
   const handleOpenRoleDialog = (user) => {
     setSelectedUserId(user._id);

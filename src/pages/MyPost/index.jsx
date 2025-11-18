@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Tablepost } from "@/components/Tablepost";
 import { Dialogdelete } from "@/components/Dialogdelete";
 import { GetAllBlog, DeleteBlog } from "@/services/api/blogs";
+import { toast } from "react-hot-toast";
 
 const MyPost = () => {
   const [posts, setPosts] = useState([]);
