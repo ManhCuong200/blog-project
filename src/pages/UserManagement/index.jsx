@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Usermanagement from "@/components/Usermanagement";
+import Usermanagement from "@/components/Usertable";
 import { getAllUser, deleteUser, changeUserRole } from "@/services/api/users";
 import { Dialogdelete } from "@/components/Dialogdelete";
 import { DialogChangeRole } from "@/components/DialogChangeRole";
+import { toast } from "react-hot-toast";
 
 const UserManagement = () => {
   const [listUsers, setListUsers] = useState([]);
-  const [usersID, setUsersID] = useState(null); 
+  const [usersID, setUsersID] = useState(null);
   const [openDelete, setOpenDelete] = useState(false);
   const [openRoleDialog, setOpenRoleDialog] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
@@ -27,8 +28,12 @@ const UserManagement = () => {
         )
       );
       setOpenRoleDialog(false);
+      toast.success("Role updated successfully");
     } catch (err) {
-      console.error("Lỗi khi thay đổi role:", err);
+      const message =
+        err?.response?.data?.message ||
+        "Error changing role. Please try again.";
+      toast.error(message);
     }
   };
 
@@ -42,8 +47,12 @@ const UserManagement = () => {
       await deleteUser(usersID);
       setListUsers((prev) => prev.filter((user) => user._id !== usersID));
       setOpenDelete(false);
+      toast.success("User deleted successfully");
     } catch (err) {
-      console.error("Lỗi khi xóa user:", err);
+      const message =
+        err?.response?.data?.message ||
+        "Error deleting user. Please try again.";
+      toast.error(message);
     }
   };
 
@@ -67,7 +76,6 @@ const UserManagement = () => {
         handleOpenDelete={handleOpenDelete}
         handleOpenRoleDialog={handleOpenRoleDialog}
       />
-
       <Dialogdelete
         open={openDelete}
         setOpen={setOpenDelete}

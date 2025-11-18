@@ -16,26 +16,27 @@ const MyPost = () => {
   const handleDelete = async () => {
     try {
       await DeleteBlog(deletePostId);
-      const response = await GetAllBlog();
-      setPosts(response.items);
+      setPosts((prev) => prev.filter((post) => post._id !== deletePostId));
       setOpenDelete(false);
+      toast.success("Blog deleted successfully!");
     } catch (err) {
-      console.log("Lỗi khi xóa blog:", err);
+      const message = err?.response?.data?.message || "Lỗi khi xóa blog!";
+      toast.error(message);
     }
   };
 
+  const fetchPosts = async () => {
+    try {
+      const response = await GetAllBlog();
+      const data = response.items;
+      setPosts(data);
+    } catch (err) {
+      console.error("Lỗi khi tải blog:", err);
+      setPosts([]);
+    }
+  };
+  
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await GetAllBlog();
-        console.log("response", response);
-        const data = response.items;
-        setPosts(data);
-      } catch {
-        console.log("Lỗi khi tải blog:", err);
-        setPosts([]);
-      }
-    };
     fetchPosts();
   }, []);
 

@@ -24,7 +24,7 @@ export function Dialogdelete({
       <DialogPortal>
         <DialogContent className="rounded-xl p-6">
           <DialogClose className="absolute right-4 top-4 opacity-70 hover:opacity-100 cursor-pointer">
-            <X className="h-5 w-5" />
+            <X className="h-5 w-5 cursor-pointer" />
           </DialogClose>
 
           <DialogHeader>
@@ -42,7 +42,7 @@ export function Dialogdelete({
               <Button variant="outline">Cancel</Button>
             </DialogClose>
             <Button
-              className="bg-red-600 hover:bg-red-700"
+              className="bg-red-600 hover:bg-red-700 cursor-pointer"
               onClick={() => {
                 onConfirm();       
                 setOpen(false);    

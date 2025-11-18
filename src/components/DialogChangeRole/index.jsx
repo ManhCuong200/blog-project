@@ -38,7 +38,7 @@ export function DialogChangeRole({
           <label className="text-sm font-medium">Select Role</label>
 
           <Select value={currentRole} onValueChange={setCurrentRole}>
-            <SelectTrigger className="mt-2 w-full">
+            <SelectTrigger className="mt-2 w-full cursor-pointer">
               <SelectValue placeholder="Choose role" />
             </SelectTrigger>
 
@@ -51,7 +51,7 @@ export function DialogChangeRole({
 
         <DialogFooter className="mt-6 flex justify-end gap-3">
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline cursor-pointer">Cancel</Button>
           </DialogClose>
 
           <Button onClick={onSave} className="bg-[#5044E5] text-white cursor-pointer">
